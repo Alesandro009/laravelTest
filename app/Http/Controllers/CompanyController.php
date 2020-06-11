@@ -45,7 +45,7 @@ class CompanyController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'email',
-            'logo' => 'dimensions:min_width=100,min_height=100'
+            'logo' => 'mimes:jpeg,png,jpg|dimensions:min_width=100,min_height=100|max:3000'
         ]);
 
         $file = '';
@@ -85,10 +85,10 @@ class CompanyController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'email',
-            // 'logo' => 'dimensions:width=100,height=100'
+            'logo' => 'mimes:jpeg,png,jpg|dimensions:min_width=100,min_height=100|max:3000'
         ]);
         $data = $request->all();
-        
+
         if ($request->file('logo')) {
             $this->deleteFile($company->logo);
             $file = $this->saveFile($request->file('logo'), '_logo');
@@ -137,6 +137,6 @@ class CompanyController extends Controller
 
     public function show(Companies $company)
     {
-        return view('companies.show',compact('company'));
+        return view('companies.show', compact('company'));
     }
 }
