@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::resource('companies','CompanyController')->middleware('auth');;
+Route::resource('employes','EmployeesController')->middleware('auth');;
